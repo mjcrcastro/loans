@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('master');
 });
 
 /*
@@ -28,4 +28,5 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+    Route::resource('customers', 'CustomersController');
 });

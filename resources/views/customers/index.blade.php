@@ -6,10 +6,7 @@ active
 
 @section('form_search')
 
-{{ Form::open(array('class'=>'navbar-form navbar-left','method'=>'get','role'=>'search','route'=>'products.index')) }}
-<div class="form-group">
-    {{ Form::text('filter',$filter,array('class'=>'form-control','placeholder'=>'Search')) }}
-</div>
+{{ Form::open(array('class'=>'navbar-form navbar-left','method'=>'get','role'=>'search','route'=>'customers.index')) }}
 {{ Form::submit('Search', array('class'=>'btn btn-default')) }} 
 {{ Form::close() }}
 
@@ -18,9 +15,9 @@ active
 @section('main')
 <div class="container-fluid">
     <h1> All products </h1>
-    <p> {{ link_to_route('products.create', Lang::get('products.add.new')) }} </p>
+    <p> {{ link_to_route('customers.create', Lang::get('products.add.new')) }} </p>
 
-    @if ($products->count())
+    @if ($customers->count())
     <table class="table table-striped table-ordered table-condensed">
         <thead>
             <tr>

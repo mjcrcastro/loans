@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Customer;
 
 class CustomersController extends Controller
 {
-    //
+    //returns a list of customers
     public function index() {
-        reture View::make('customers.index');
+        $customers = Customer::paginate(10);
+        return view('customers.index', compact('customers'));
     }
 }
