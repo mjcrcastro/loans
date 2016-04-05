@@ -23,9 +23,8 @@ class CreateCustomersTable extends Migration
             $table->string('phone');
             $table->string('lastname');
             $table->string('occupation');
-            
-            
-         }
+                       
+        });
     }
 
     /**
