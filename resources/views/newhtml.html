@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Loans Management System</title>
+        <title>SB Admin - Bootstrap Admin Template</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -174,7 +175,7 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Configuration <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="demo" class="collapse">
                                 <li>
-                                   {{ link_to_route('contacts.index', Lang::get('contacts.contacts')) }}
+                                    <a href="http://localhost:8000/contacts">Contacts</a>
                                 </li>
                                 <li>
                                     <a href="#">Dropdown Item</a>
@@ -194,7 +195,31 @@
 
             <div id="page-wrapper">
                 <div class="container-fluid">
-                    @yield('main')
+                    
+<div class='container container-fluid'>
+    <h1> Create Contact </h1>
+    <form method="POST" action="http://localhost:8000/contacts" accept-charset="UTF-8"><input name="_token" type="hidden" value="xzLQvlgTeQmBxrtozgfkubtqlmIVxBBPNQtPdK6A">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input class="form-control"="class=&quot;form-control&quot;" name="name" type="text" id="name">
+    </div>
+    <div class="form-group">
+        <label for="first_lastname">First Last Name:</label>
+        <input class="form-control"="class=&quot;form-control&quot;" name="first_lastname" type="text" id="first_lastname">
+    </div>
+    <div class="form-group">
+        <label for="second_lastname">Second Last Name:</label>
+        <input class="form-control"="class=&quot;form-control&quot;" name="second_lastname" type="text" id="second_lastname">
+    </div>
+    <div class="form-group">    
+        <input class="btn  btn-primary col-xs-6" type="submit" value="Submit">
+        <a href="http://localhost:8000/contacts" class="btn btn-default col-xs-6">Cancel</a>
+    </div>    </form>
+
+
+
+</div>
+
                 </div>
             </div>
             <!-- /#page-wrapper -->

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('master');
+    return view('dashboard.index');
 });
 
 /*
@@ -28,5 +28,5 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
-    Route::resource('customers', 'CustomersController');
+    Route::resource('contacts', 'ContactsController');
 });

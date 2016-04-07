@@ -1,12 +1,12 @@
 @extends('master')
 
-@section('products_active')
+@section('contacts_active')
 active
 @stop
 
 @section('form_search')
 
-{{ Form::open(array('class'=>'navbar-form navbar-left','method'=>'get','role'=>'search','route'=>'customers.index')) }}
+{{ Form::open(array('class'=>'navbar-form navbar-left','method'=>'get','role'=>'search','route'=>'contacts.index')) }}
 {{ Form::submit('Search', array('class'=>'btn btn-default')) }} 
 {{ Form::close() }}
 
@@ -14,14 +14,14 @@ active
 
 @section('main')
 <div class="container-fluid">
-    <h1> All products </h1>
-    <p> {{ link_to_route('customers.create', Lang::get('products.add.new')) }} </p>
+    <h1> All contacts </h1>
+    <p> {{ link_to_route('contacts.create', Lang::get('contacts.create')) }} </p>
 
-    @if ($customers->count())
+    @if ($contacts->count())
     <table class="table table-striped table-ordered table-condensed">
         <thead>
             <tr>
-                <th>{{Lang::get('products.description')}}</th>
+                <th>{{Lang::get('contacts.description')}}</th>
                 <th>Product type</th>
                 <th></th>
                 <th></th>
@@ -55,6 +55,6 @@ active
 </div>
 {{ $products->appends(array('filter'=>$filter))->links() }}
 @else
-There are no products
+There are no contacts
 @endif
 @stop
