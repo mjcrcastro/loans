@@ -19,11 +19,15 @@ class CreateContactsTable extends Migration
             $table->string('second_lastname');
             $table->date('birthdate');
             $table->string('identification');
-            $table->string('country');
-            $table->string('city');
+            $table->string('country_id')
+                ->index()->references('id')->on('countries');
+            $table->string('department_id')
+                ->index()->references('id')->on('departments');
+            $table->string('municipality_id')
+                ->index()->references('id')->on('municipalities');
             $table->string('address');
             $table->string('phones');
-            $table->string('occupation');
+            $table->string('occupation_id');
             $table->string('picture');
             $table->string('email');
             $table->string('taxid'); //RUC in this case
