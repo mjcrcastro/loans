@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Contact;
+Use App\Contact;
 
-class ContactsController extends Controller
-{
+class ContactsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
-    {
+    public function index() {
         //
-        $contacts = Contact::paginate(10);
+        $contacts = Contact::paginate(7);
         return view('contacts.index', compact('contacts'));
     }
 
@@ -26,8 +24,7 @@ class ContactsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
         return view('contacts.create');
     }
@@ -38,9 +35,15 @@ class ContactsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+       //$this->validate returns an error message to the view.
+        $this->validate($request,['identification'=>'required|unique:contacts,identification,{{$id}}']);
+        
+        $contact = Contact::create($request->except('_token'));
+            //and return to the index
+        return  redirect()->route('contacts.index')
+                            ->with('message', 'Contact ' . $contact->name . ' created');
+        
     }
 
     /**
@@ -49,8 +52,7 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -60,8 +62,7 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -72,8 +73,7 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -83,8 +83,8 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

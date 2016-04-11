@@ -26,8 +26,8 @@
             </div>
             <div class="form-group ">
                 {{ Form::label('identification', 'Identification:') }}
-                {{ Form::text('identification',null,array('class'=>'form-control')) }}
-            </div>
+                {{ Form::text('identification',null,array('class'=>"form-control " . $errors->has("identification")?:"has-error")) }}
+            </div> 
             <div class="form-group">
                 {{ Form::label('birthdate', 'Birthdate:') }}
                 {{ Form::text('birthdate',null,array('class'=>'form-control')) }}

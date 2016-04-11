@@ -21,30 +21,22 @@ active
     <table class="table table-striped table-ordered table-condensed">
         <thead>
             <tr>
-                <th>{{Lang::get('contacts.description')}}</th>
-                <th>Product type</th>
-                <th></th>
+                <th>Name</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($products as $product)
+            @foreach ($contacts as $contact)
             <tr>
-
-                <td>
-                    @foreach ($product->productDescriptors as $productdescriptor)
-                    {{ $productdescriptor->descriptor->description.' '}}
-                    @endforeach
+                <td> 
+                   {{ $contact->name . $contact->first_lastname . $contact->second_lastname }} 
                 </td>
                 <td> 
-                   {{ $product->productType->description }} 
-                </td>
-                <td> 
-                    {{ link_to_route('products.edit', 'Edit', array($product->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 
+                    {{ link_to_route('contacts.edit', 'Edit', array($contact->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 
                 </td>
                 <td>
-                    {{ Form::open(array('method'=>'DELETE', 'route'=>array('products.destroy', $product->id))) }}
+                    {{ Form::open(array('method'=>'DELETE', 'route'=>array('contacts.destroy', $contact->id))) }}
                     {{ Form::submit('Delete', array('class'=>'btn btn-danger '.Config::get('global/default.button_size'), 'onclick'=>"if(!confirm('Are you sure to delete this item?')){return false;};")) }} 
                     {{ Form::close() }}
                 </td>
@@ -53,8 +45,8 @@ active
         </tbody>
     </table>
 </div>
-{{ $products->appends(array('filter'=>$filter))->links() }}
+{!! $contacts->links() !!}
 @else
-There are no contacts
+ There are no contacts
 @endif
 @stop
