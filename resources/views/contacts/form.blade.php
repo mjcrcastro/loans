@@ -1,7 +1,5 @@
 {{--This stub is a form for both editing and creating contacts, see usages in
-    views contacts.create and contacts.edit
-    
-    --}}
+    views contacts.create and contacts.edit --}}
 
 <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
@@ -24,9 +22,14 @@
                 {{ Form::label('second_lastname', 'Second Last Name:') }}
                 {{ Form::text('second_lastname',null,array('class'=>'form-control')) }}
             </div>
-            <div class="form-group ">
+            <div class="form-group @if ($errors->has('identification')) has-error @endif">
                 {{ Form::label('identification', 'Identification:') }}
-                {{ Form::text('identification',null,array('class'=>"form-control " . $errors->has("identification")?:"has-error")) }}
+                {{ Form::text('identification',null,array('class'=>"form-control")) }}
+                @if ($errors->has('identification')) 
+                <div class="small">
+                    {{ $errors->first('identification', ':message') }} 
+                </div>
+                @endif
             </div> 
             <div class="form-group">
                 {{ Form::label('birthdate', 'Birthdate:') }}

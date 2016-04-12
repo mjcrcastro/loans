@@ -152,7 +152,7 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li class="active">
+                        <li @yield("dashboard_active")>
                             <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                         </li>
                         <li>
@@ -171,13 +171,21 @@
                             <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                         </li>
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Configuration <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="demo" class="collapse">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#entities"><i class="fa fa-fw fa-arrows-v"></i> Entities <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="entities" class="collapse">
                                 <li>
                                    {{ link_to_route('contacts.index', Lang::get('contacts.contacts')) }}
                                 </li>
+                            </ul>
+                        </li>
+                        <li @yield("aux_tables_active")>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#aux_tables"><i class="fa fa-fw fa-arrows-v"></i> Auxiliary Tables <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="aux_tables" class="collapse">
                                 <li>
-                                    <a href="#">Dropdown Item</a>
+                                   {{ link_to_route('countries.index', Lang::get('countries.countries')) }}
+                                </li>
+                                <li>
+                                   {{ link_to_route('departments.index', Lang::get('departments.departments')) }}
                                 </li>
                             </ul>
                         </li>
