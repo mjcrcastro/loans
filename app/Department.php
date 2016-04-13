@@ -17,4 +17,8 @@ class Department extends Model
     public function country() {
         return $this->belongsTo('App\Country');
     }
+    
+    public function getDepartmentCountry() {
+        return $this->country->description.' '.$this->description;
+    }
 }

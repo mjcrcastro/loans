@@ -31,4 +31,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('contacts', 'ContactsController');
     Route::resource('countries', 'CountriesController');
     Route::resource('departments', 'DepartmentsController');
+    Route::resource('municipalities', 'MunicipalitiesController');
 });

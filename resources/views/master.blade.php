@@ -153,7 +153,7 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li @yield("dashboard_active")>
-                            <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                             <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
@@ -174,18 +174,21 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#entities"><i class="fa fa-fw fa-arrows-v"></i> Entities <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="entities" class="collapse">
                                 <li>
-                                   {{ link_to_route('contacts.index', Lang::get('contacts.contacts')) }}
+                                    {{ link_to_route('contacts.index', Lang::get('contacts.contacts')) }}
                                 </li>
                             </ul>
                         </li>
                         <li @yield("aux_tables_active")>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#aux_tables"><i class="fa fa-fw fa-arrows-v"></i> Auxiliary Tables <i class="fa fa-fw fa-caret-down"></i></a>
+                             <a href="javascript:;" data-toggle="collapse" data-target="#aux_tables"><i class="fa fa-fw fa-arrows-v"></i> Auxiliary Tables <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="aux_tables" class="collapse">
                                 <li>
-                                   {{ link_to_route('countries.index', Lang::get('countries.countries')) }}
+                                    {{ link_to_route('countries.index', Lang::get('countries.countries')) }}
                                 </li>
                                 <li>
-                                   {{ link_to_route('departments.index', Lang::get('departments.departments')) }}
+                                    {{ link_to_route('departments.index', Lang::get('departments.departments')) }}
+                                </li>
+                                <li>
+                                    {{ link_to_route('municipalities.index', Lang::get('municipalities.municipalities')) }}
                                 </li>
                             </ul>
                         </li>
@@ -204,8 +207,13 @@
                 <div class="container-fluid">
                     @yield('main')
                 </div>
+                <div id="footer">
+                    Copyright &copy; 2016 by Majcro<br/>
+                    All Rights Reserved
+                </div><!-- footer -->
             </div>
             <!-- /#page-wrapper -->
+
 
         </div>
         <!-- /#wrapper -->

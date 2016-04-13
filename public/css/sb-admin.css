@@ -6,6 +6,14 @@
 
 /* Global Styles */
 
+#footer {
+	padding: 10px;
+	margin: 10px 20px;
+	font-size: 0.8em;
+	text-align: center;
+	border-top: 1px solid #C9E0ED;
+}
+
 body {
     margin-top: 100px;
     background-color: #222;

@@ -1,5 +1,5 @@
-{{--This stub is a form for both editing and creating countries, see usages in
-    views countries.create and countries.edit --}}
+{{--This stub is a form for both editing and creating departments, see usages in
+    views departments.create and departments.edit --}}
 
 <div class="form-group @if ($errors->has('country_id')) has-error @endif">
     {{ Form::label('country', 'Country:') }}
