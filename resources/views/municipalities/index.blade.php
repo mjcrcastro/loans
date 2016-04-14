@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th>Description</th>
-                <th>Municipality</th>
+                <th>Department</th>
                 <th>Country</th>
                 <th></th>
                 <th></th>
@@ -40,8 +40,10 @@
                 <td> 
                    {{ $municipality->description }} 
                 </td>
+                <td>
                    {{ $municipality->department->description }} 
-                </td><td> 
+                </td>
+                <td> 
                    {{ $municipality->department->country->description }} 
                 </td>
                 <td> 
@@ -59,6 +61,6 @@
 </div>
 {!! $municipalities->links() !!}
 @else
- There are no municipalities
+    There are no municipalities
 @endif
 @stop

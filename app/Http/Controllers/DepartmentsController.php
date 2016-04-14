@@ -49,7 +49,7 @@ class DepartmentsController extends Controller
         $department = Department::create($request->all());
         //and return to the index
         return redirect()->route('departments.index')
-                        ->with('status', 'Department ' . $department->description . ' created');
+                        ->with('status', 'Department ' . $department->country_department . ' created');
     }
 
     /**
@@ -115,8 +115,16 @@ class DepartmentsController extends Controller
     {
         //delete the department
         $description = Department::find($id)->description;
+        
+        $municipalities = \App\Municipality::where('department_id','=',$id);
+        //check if there are municipalities within the department first
+        if($municipalities->count()) {
+            return redirect()->route('departments.index')
+                ->with('warning', 'Department ' . $description . ' has municipalities');
+        }else{
         Department::find($id)->delete();
         return redirect()->route('departments.index')
                 ->with('status', 'Department ' . $description . ' deleted');
+    }
     }
 }

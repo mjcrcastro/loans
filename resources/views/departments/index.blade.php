@@ -23,6 +23,12 @@
         </div>
     @endif
     
+    @if (session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
+    
     @if ($departments->count())
     <table class="table table-striped table-ordered table-condensed">
         <thead>

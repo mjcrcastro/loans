@@ -102,9 +102,17 @@ class CountriesController extends Controller {
     public function destroy($id) {
         //
         $description = Country::find($id)->description;
+        //check for existing departments that belong to this country
+        $departments = \App\Department::where('country_id','=',$id);
+        if ($departments->count()) {
+            return redirect()->route('countries.index')
+                ->with('warning', 'Country ' . $description . ' has departments');
+        }
+        else{
         Country::find($id)->delete();
         return redirect()->route('countries.index')
-                ->with('status', 'Country ' . $description . ' deleted');;
+                ->with('status', 'Country ' . $description . ' deleted');
+        }
     }
 
 }

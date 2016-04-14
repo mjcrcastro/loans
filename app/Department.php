@@ -18,7 +18,8 @@ class Department extends Model
         return $this->belongsTo('App\Country');
     }
     
-    public function getDepartmentCountry() {
-        return $this->country->description.' '.$this->description;
+    public function getCountryDepartmentAttribute() { 
+        //for the naming conventio see: https://laravel.com/docs/5.2/eloquent-mutators#accessors-and-mutators
+        return $this->description .'/'.$this->country->description;
     }
 }

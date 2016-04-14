@@ -30,14 +30,15 @@ class MunicipalitiesController extends Controller
      */
     public function create()
     {
-        DB::connection()->enableQueryLog();
         //attach the list of departments to the municipalities creation form
-        $departmentsOnly = Department::orderBy('description')->get();
-        $departments = $departmentsOnly->lists('getDepartmentCountry','id');
-        
-        $queries = DB::getQueryLog();
-        $last_query = end($queries);
-        return $last_query;
+        //see department model for the accessor for country_department
+        //usign an efficient query
+       $departments = Department::orderBy('departments.description')->get()
+                ->lists('country_department','id'); 
+       //I get the same results with the query below but executes an additional query 
+       //for every department within a country
+        /*$departments = Department::with('country')->orderBy('departments.description')
+                ->get()->lists('country_department','id');*/
         
         return view('municipalities.create', compact('departments'));
     }
@@ -50,7 +51,15 @@ class MunicipalitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$this->validate returns an error message to the view.
+        $this->validate($request, ['description' => 'required|unique:municipalities,description,null,{{$id}},department_id,'.$request->department_id],
+                                  ['department_id'=>'required']);
+
+        $municipality = Municipality::create($request->all());
+        //and return to the index
+        return redirect()->route('municipalities.index')
+                        ->with('status', 
+                                'Municipality ' . $municipality->country_department_municipality . ' created');
     }
 
     /**
