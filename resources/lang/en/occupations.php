@@ -12,10 +12,11 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-    'plural' => 'Departments',
-    'singular'=>'Department',
-    'create' => 'New department',
-    'index'  => 'List departments;',
+    'plural' => 'Occupations',
+    'singular' => 'Occupation',
+    'create' => 'New Occupation',
+    'edit' => 'Edit Ocupation',
+    'index'  => 'List Occupations;',
     'view' => 'Details',
 
 ];

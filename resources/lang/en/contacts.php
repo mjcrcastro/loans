@@ -16,5 +16,6 @@ return [
     'create' => 'New Contact',
     'index'  => 'List Contacts;',
     'description' => 'Details',
+    'taxid'=>'RUC',
 
 ];

@@ -10,11 +10,11 @@ class="active"
 
 @section('main')
 
-<h1> {{ Lang::get('occupations.edit') }} </h1>
+<h1> Edit contact </h1>
 
 <div class='container-fluid'>
-    {{ Form::model($occupation, array('method'=>'PATCH', 'route'=> array('occupations.update', $occupation->id)))  }}
-        @include('occupations.form')
+    {{ Form::model($contact, array('method'=>'PATCH', 'route'=> array('contacts.update', $contact->id)))  }}
+        @include('contacts.form')
     {{ Form::close() }}
 </div>
 

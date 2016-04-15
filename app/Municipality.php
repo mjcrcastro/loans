@@ -19,10 +19,10 @@ class Municipality extends Model
     }
     
     public function getCountryDepartmentMunicipalityAttribute() { 
-        //for the naming conventio see: https://laravel.com/docs/5.2/eloquent-mutators#accessors-and-mutators
+        //for the naming convention see: https://laravel.com/docs/5.2/eloquent-mutators#accessors-and-mutators
         return $this->description .'/'.
-                $this->department->description.'/'.
-                $this->department->country->description;
+               $this->department->description.'/'.
+               $this->department->country->description;
     }
     
 }

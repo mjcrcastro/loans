@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Department;
 use App\Country;
 
-class DepartmentsController extends Controller
-{
+class DepartmentsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //list of all departments
         $departments = Department::paginate(7);
         return view('departments.index', compact('departments'));
@@ -27,8 +25,7 @@ class DepartmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //attach the list of countries to the department creation form
         $countries = Country::lists('description', 'id');
         return view('departments.create', compact('countries'));
@@ -40,11 +37,12 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //$this->validate returns an error message to the view.
-        $this->validate($request, ['description' => 'required|unique:departments,description,null,{{$id}},country_id,'.$request->country_id],
-                                  ['country_id'=>'required']);
+        $this->validate($request, [
+            'description' => 'required|unique:departments,description,null,{{$id}},country_id,' . $request->country_id, 
+            'country_id' => 'required'
+            ]);
 
         $department = Department::create($request->all());
         //and return to the index
@@ -58,8 +56,7 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -69,18 +66,17 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //Actual code to execute
         $department = Department::find($id); //the the department by the id
         if (is_null($department)) { //if no department is found
             return redirect()->route('departments.index'); //go to index
         }
-        
+
         //otherwise display the shop editor view but before,
         //attach the list of countries to the department creation form
         $countries = Country::lists('description', 'id');
-        return view('departments.edit', compact('department','countries'));
+        return view('departments.edit', compact('department', 'countries'));
         // End of actual code to execute
     }
 
@@ -91,11 +87,9 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //$this->validate returns an error message to the view.
-        $this->validate($request, ['description' => 'required|unique:departments,description,null,{{$id}},country_id,'.$request->country_id],
-                                  ['country_id'=>'required']);
+        $this->validate($request, ['description' => 'required|unique:departments,description,null,{{$id}},country_id,' . $request->country_id], ['country_id' => 'required']);
 
         $department = Department::find($id);
         $department->fill($request->all());
@@ -111,20 +105,20 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //delete the department
         $description = Department::find($id)->description;
-        
-        $municipalities = \App\Municipality::where('department_id','=',$id);
+
+        $municipalities = \App\Municipality::where('department_id', '=', $id);
         //check if there are municipalities within the department first
-        if($municipalities->count()) {
+        if ($municipalities->count()) {
             return redirect()->route('departments.index')
-                ->with('warning', 'Department ' . $description . ' has municipalities');
-        }else{
-        Department::find($id)->delete();
-        return redirect()->route('departments.index')
-                ->with('status', 'Department ' . $description . ' deleted');
+                            ->with('warning', 'Department ' . $description . ' has municipalities');
+        } else {
+            Department::find($id)->delete();
+            return redirect()->route('departments.index')
+                            ->with('status', 'Department ' . $description . ' deleted');
+        }
     }
-    }
+
 }

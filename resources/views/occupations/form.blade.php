@@ -1,5 +1,5 @@
-{{--This stub is a form for both editing and creating countries, see usages in
-    views countries.create and countries.edit --}}
+{{--This stub is a form for both editing and creating occupations, see usages in
+    views occupations.create and occupations.edit --}}
 
 <div class="form-group @if ($errors->has('description')) has-error @endif">
     {{ Form::label('description', 'Description:') }}
@@ -13,6 +13,6 @@
 <div class="row-fluid">
     <div class="form-group">    
         {{ Form::submit('Submit', array('class'=>'btn  btn-primary col-xs-6')) }}
-        {{ link_to_route('countries.index', 'Cancel', [],array('class'=>'btn btn-default col-xs-6')) }}
+        {{ link_to_route('occupations.index', 'Cancel', [],array('class'=>'btn btn-default col-xs-6')) }}
     </div>
 </div>

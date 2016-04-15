@@ -12,7 +12,8 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-    'municipalities' => 'Municipalities',
+    'plural' => 'Municipalities',
+    'singular' => 'Municipality',
     'create' => 'New municipality',
     'index'  => 'List municipalities;',
     'view' => 'Details',

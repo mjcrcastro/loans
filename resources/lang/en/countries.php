@@ -12,7 +12,8 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-    'countries' => 'Countries',
+    'plural' => 'Countries',
+    'singular' => 'Country',
     'create' => 'New Country',
     'index'  => 'List Countries;',
     'view' => 'Details',

@@ -14,8 +14,8 @@
 
 @section('main')
 <div class="container-fluid">
-    <h1> All countries </h1>
-    <p> {{ link_to_route('countries.create', Lang::get('countries.create')) }} </p>
+    <h1> All occupations </h1>
+    <p> {{ link_to_route('occupations.create', Lang::get('occupations.create')) }} </p>
     
     @if (session('status'))
         <div class="alert alert-success">
@@ -29,7 +29,7 @@
         </div>
     @endif
     
-    @if ($countries->count())
+    @if ($occupations->count())
     <table class="table table-striped table-ordered table-condensed">
         <thead>
             <tr>
@@ -39,16 +39,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($countries as $country)
+            @foreach ($occupations as $occupation)
             <tr>
                 <td> 
-                   {{ $country->description }} 
+                   {{ $occupation->description }} 
                 </td>
                 <td> 
-                    {{ link_to_route('countries.edit', 'Edit', array($country->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 
+                    {{ link_to_route('occupations.edit', 'Edit', array($occupation->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 
                 </td>
                 <td>
-                    {{ Form::open(array('method'=>'DELETE', 'route'=>array('countries.destroy', $country->id))) }}
+                    {{ Form::open(array('method'=>'DELETE', 'route'=>array('occupations.destroy', $occupation->id))) }}
                     {{ Form::submit('Delete', array('class'=>'btn btn-danger '.Config::get('global/default.button_size'), 'onclick'=>"if(!confirm('Are you sure to delete this item?')){return false;};")) }} 
                     {{ Form::close() }}
                 </td>
@@ -57,8 +57,8 @@
         </tbody>
     </table>
 </div>
-{!! $countries->links() !!}
+{!! $occupations->links() !!}
 @else
- There are no countries
+    There are no occupations
 @endif
 @stop

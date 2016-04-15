@@ -32,4 +32,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('countries', 'CountriesController');
     Route::resource('departments', 'DepartmentsController');
     Route::resource('municipalities', 'MunicipalitiesController');
+    Route::resource('occupations', 'OccupationsController');
 });

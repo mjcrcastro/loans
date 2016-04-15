@@ -16,12 +16,23 @@ active
 <div class="container-fluid">
     <h1> All contacts </h1>
     <p> {{ link_to_route('contacts.create', Lang::get('contacts.create')) }} </p>
-
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    
+    @if (session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
     @if ($contacts->count())
     <table class="table table-striped table-ordered table-condensed">
         <thead>
             <tr>
                 <th>Name</th>
+                <th>{{ Lang::get('municipalities.singular') }}</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -30,7 +41,10 @@ active
             @foreach ($contacts as $contact)
             <tr>
                 <td> 
-                   {{ $contact->name . $contact->first_lastname . $contact->second_lastname }} 
+                   {{ $contact->name . ' ' . $contact->first_lastname . ' ' .  $contact->second_lastname }} 
+                </td>
+                <td> 
+                   {{ $contact->municipality->country_department_municipality }} 
                 </td>
                 <td> 
                     {{ link_to_route('contacts.edit', 'Edit', array($contact->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 

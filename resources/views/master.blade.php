@@ -11,6 +11,11 @@
 
         <title>Loans Management System</title>
 
+
+        <!-- jQuery -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
 
@@ -46,7 +51,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">SB Admin</a>
+                    <a class="navbar-brand" href="/">Dashboard</a>
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
@@ -152,24 +157,6 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li @yield("dashboard_active")>
-                             <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                        </li>
-                        <li>
-                            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                        </li>
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#entities"><i class="fa fa-fw fa-arrows-v"></i> Entities <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="entities" class="collapse">
@@ -182,21 +169,18 @@
                              <a href="javascript:;" data-toggle="collapse" data-target="#aux_tables"><i class="fa fa-fw fa-arrows-v"></i> Auxiliary Tables <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="aux_tables" class="collapse">
                                 <li>
-                                    {{ link_to_route('countries.index', Lang::get('countries.countries')) }}
+                                    {{ link_to_route('countries.index', Lang::get('countries.plural')) }}
                                 </li>
                                 <li>
-                                    {{ link_to_route('departments.index', Lang::get('departments.departments')) }}
+                                    {{ link_to_route('departments.index', Lang::get('departments.plural')) }}
                                 </li>
                                 <li>
-                                    {{ link_to_route('municipalities.index', Lang::get('municipalities.municipalities')) }}
+                                    {{ link_to_route('municipalities.index', Lang::get('municipalities.plural')) }}
+                                </li>
+                                <li>
+                                    {{ link_to_route('occupations.index', Lang::get('occupations.plural')) }}
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                         </li>
                     </ul>
                 </div>
@@ -217,9 +201,6 @@
 
         </div>
         <!-- /#wrapper -->
-
-        <!-- jQuery -->
-        <script src="/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/js/bootstrap.min.js"></script>

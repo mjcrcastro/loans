@@ -11,9 +11,9 @@ active
 @section('main')
 
     <div class='container-fluid'>
-        <h1> Create country </h1>
-        {{ Form::open(array('route'=>'countries.store')) }}
-            @include('countries.form')
+        <h1> {{ Lang::get('occupations.create') }} </h1>
+        {{ Form::open(array('route'=>'occupations.store')) }}
+            @include('occupations.form')
         {{ Form::close() }}
     </div>
 
