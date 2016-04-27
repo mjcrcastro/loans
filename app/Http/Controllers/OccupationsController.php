@@ -39,7 +39,7 @@ class OccupationsController extends Controller
      */
     public function store(Request $request) {
         //$this->validate returns an error message to the view.
-        $this->validate($request, ['description' => 'required|unique:occupations,description,{{$id}}']);
+        $this->validate($request, ['description' => 'required|unique:occupations,description']);
 
         $occupation = Occupation::create($request->all());
         //and return to the index
