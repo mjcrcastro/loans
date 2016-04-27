@@ -37,7 +37,7 @@ class CountriesController extends Controller {
      */
     public function store(Request $request) {
         //$this->validate returns an error message to the view.
-        $this->validate($request, ['description' => 'required|unique:countries,description,'.$id]);
+        $this->validate($request, ['description' => 'required|unique:countries,description,'.$request->all()->id]);
 
         $country = Country::create($request->all());
         //and return to the index
