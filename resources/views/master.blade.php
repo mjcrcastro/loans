@@ -157,7 +157,15 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li>
+                        <li @yield("loans_active")>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#loans"><i class="fa fa-fw fa-arrows-v"></i> Operations <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="loans" class="collapse">
+                                <li>
+                                    {{ link_to_route('loans.index', Lang::get('loans.loans')) }}
+                                </li>
+                            </ul>
+                        </li>
+                        <li @yield("entities_active")>
                             <a href="javascript:;" data-toggle="collapse" data-target="#entities"><i class="fa fa-fw fa-arrows-v"></i> Entities <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="entities" class="collapse">
                                 <li>

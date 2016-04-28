@@ -4,8 +4,8 @@
     let know master blade that the shops 
     menu option needs to be highligted--}}
 
-@section('config_active')
-active
+@section('aux_tables_active')
+    class="active"
 @stop
 
 @section('main')

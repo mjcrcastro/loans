@@ -16,16 +16,22 @@ class Loan extends Model
         'late_fee','contract_URL'
     ];
     
-    //relationship with munitipalities
-    public function municipality() {
-        return $this->belongsTo('App\Contact');
+    
+    public function loanBorrower() {
+        return $this->belongsTo('App\Contact','borrower_id');
     }
     
-    public function getFullNameAttribute() { 
-        //for the naming convention see: https://laravel.com/docs/5.2/eloquent-mutators#accessors-and-mutators
-        return $this->name .' '.
-               $this->first_lastname.' '.
-               $this->second_lastname.'/'.
-               $this->identification;
+    public function loanGurarantor() {
+        return $this->belongsTo('App\Contact','guarantor_id');
     }
+    
+    public function loanAgent() {
+        return $this->belongsTo('App\Contact','agent_id');
+    }
+    
+    public function getCountryDepartmentAttribute() { 
+        //for the naming conventio see: https://laravel.com/docs/5.2/eloquent-mutators#accessors-and-mutators
+        return $this->description .'/'.$this->country->description;
+    }
+    
 }
