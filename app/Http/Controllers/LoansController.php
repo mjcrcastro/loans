@@ -43,7 +43,31 @@ class LoansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$this->validate returns an error message to the view.
+        $this->validate($request,[
+            'borrower_id'=>'required',
+            'approval_date'=>'required|date',
+            'fund_id'=>'required',
+            'loan_category_id'=>'required',
+            'guarantor_id'=>'required',
+            'loan_status_id'=>'required',
+            'agent_id'=>'required',
+            'principal'=>'required|numeric|min:1',
+            'term'=>'required|integer|min:1',
+            'loan_rate'=>'required|numeric|min:0.01',
+            'late_fee'=>'required|numeric|min:0.01',
+            'guarantor_id'=>'required|integer',
+            'status_id'=>'required|integer',
+            'agent_id'=>'required|integer',
+            'fund_id'=>'required|integer',
+            'contract_URL'=>'required',
+            ]
+                );
+        
+        $contact = Contact::create($request->all());
+            //and return to the index
+        return  redirect()->route('contacts.index')
+                            ->with('message', 'Contact ' . $contact->name . ' created');
     }
 
     /**
