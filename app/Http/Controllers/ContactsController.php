@@ -45,7 +45,7 @@ class ContactsController extends Controller {
      */
     public function store(Request $request) {
        //$this->validate returns an error message to the view.
-        $this->validate($request,['identification'=>'required|unique:contacts,identification,{{$id}}',
+        $this->validate($request,['identification'=>'required|unique:contacts,identification,'.$id,
             'birthdate'=>'required|date']);
         
         $contact = Contact::create($request->all());
