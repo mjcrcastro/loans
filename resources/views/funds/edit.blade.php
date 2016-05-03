@@ -4,17 +4,17 @@
     let know master blade that the countries 
     menu option needs to be highligted--}}
 
-@section("loans_active")
-    class="active"
+@section('aux_tables_active')
+class="active"
 @stop
 
 @section('main')
 
-<h1> Edit loan </h1>
+<h1> Edit fund </h1>
 
 <div class='container-fluid'>
-    {{ Form::model($loan, array('method'=>'PATCH', 'route'=> array('loans.update', $loan->id)))  }}
-        @include('loans.form')
+    {{ Form::model($fund, array('method'=>'PATCH', 'route'=> array('funds.update', $fund->id)))  }}
+        @include('funds.form')
     {{ Form::close() }}
 </div>
 

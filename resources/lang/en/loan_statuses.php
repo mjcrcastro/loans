@@ -12,16 +12,10 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-    'loans' => 'Loans',
-    'create' => 'Create loan',
-    'term.id' => 'Term type',
-    'term.value' => 'Term value',
-    'loan.rate' => 'Interest rate (%)',
-    'late.fee' => 'Late fee (%)',
-    'borrower' => 'Borrower',
-    'approval.date' => 'Approval date',
-    'guarantor.singular' => 'Guarantor',
-    'status' => 'Status',
-    'agent.singular' => 'Agent',
-    'category' => 'Category',
+    'plural' => 'Loan statuses',
+    'singular' => 'Loan status',
+    'create' => 'New loan status',
+    'index'  => 'List loan statuses;',
+    'view' => 'Details',
+
 ];

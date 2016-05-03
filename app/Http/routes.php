@@ -33,5 +33,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('departments', 'DepartmentsController');
     Route::resource('municipalities', 'MunicipalitiesController');
     Route::resource('occupations', 'OccupationsController');
+    Route::resource('loan_categories','LoanCategoriesController');
+    Route::resource('funds','FundsController');
+    Route::resource('loan_statuses','LoanStatusesController');
     Route::resource('loans','LoansController');
 });

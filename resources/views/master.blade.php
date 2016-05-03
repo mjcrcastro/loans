@@ -188,6 +188,15 @@
                                 <li>
                                     {{ link_to_route('occupations.index', Lang::get('occupations.plural')) }}
                                 </li>
+                                <li>
+                                    {{ link_to_route('funds.index', Lang::get('funds.plural')) }}
+                                </li>
+                                <li>
+                                    {{ link_to_route('loan_statuses.index', Lang::get('loan_statuses.plural')) }}
+                                </li>
+                                <li>
+                                    {{ link_to_route('loan_categories.index', Lang::get('loan_categories.plural')) }}
+                                </li>
                             </ul>
                         </li>
                     </ul>

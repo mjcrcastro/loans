@@ -11,9 +11,9 @@ class Loan extends Model
     
     //which field are used for mass assigment
     protected $fillable = [
-        'contact_id','approval_date','fund_id','loan_category_id',
-        'guarantor_id','loan_status_id','principal','term','loan_rate',
-        'late_fee','contract_URL'
+        'borrower_id','agent_id','approval_date','fund_id','loan_category_id',
+        'guarantor_id','loan_status_id','principal','term_id','term_value',
+        'loan_rate', 'late_fee','contract_URL'
     ];
     
     

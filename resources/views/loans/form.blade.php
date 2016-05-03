@@ -27,6 +27,7 @@
         <li class="active"><a href="#tab1" data-toggle="tab">General Info</a></li>
         <li><a href="#tab2" data-toggle="tab">Details</a></li>
         <li><a href="#tab3" data-toggle="tab">Other Info</a></li>
+        <li><a href="#tab4" data-toggle="tab">Images</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="tab1">
@@ -40,15 +41,7 @@
                 </div>
                 @endif
             </div>
-            <div class="form-group @if ($errors->has('approval_date')) has-error @endif">
-                {{ Form::label('approval_date', 'Approval date:') }}
-                {{ Form::text('approval_date',null,array('class'=>'form-control')) }}
-                @if ($errors->has('approval_date')) 
-                <div class="small">
-                    {{ $errors->first('approval_date', ':message') }} 
-                </div>
-                @endif
-            </div>
+
             <div class="form-group @if ($errors->has('principal')) has-error @endif">
                 {{ Form::label('principal', 'Principal:') }}
                 {{ Form::text('principal',null,array('class'=>'form-control')) }}
@@ -58,20 +51,29 @@
                 </div>
                 @endif
             </div>
-            <div class="form-group @if ($errors->has('term')) has-error @endif">
-                {{ Form::label('term', Lang::get('loans.term.days').':') }}
-                {{ Form::text('term',null,array('class'=>'form-control')) }}
-                @if ($errors->has('term')) 
+            <div class="form-group @if ($errors->has('term_value')) has-error @endif">
+                {{ Form::label('term_value', Lang::get('loans.term.value').':') }}
+                {{ Form::text('term_value',null,array('class'=>'form-control')) }}
+                @if ($errors->has('term_value')) 
                 <div class="small">
-                    {{ $errors->first('term', ':message') }} 
+                    {{ $errors->first('term_value', ':message') }} 
                 </div>
                 @endif
             </div>
+            <div class="form-group @if ($errors->has('term_id')) has-error @endif">
+                {{ Form::label('term_id', Lang::get('loans.term.id').':') }}
+                {{ Form::select('term_id', $terms, null,array('class'=>'form-control')) }}
+                @if ($errors->has('term')) 
+                <div class="small">
+                    {{ $errors->first('term_id', ':message') }} 
+                </div>
+                @endif
+            </div>           
         </div>
         <div class="tab-pane" id="tab2">
             <p>
             <div class="form-group @if ($errors->has('loan_rate')) has-error @endif">
-                {{ Form::label('loan_rate', 'Loan rate:') }}
+                {{ Form::label('loan_rate', Lang::get('loans.loan.rate').':') }}
                 {{ Form::text('loan_rate',null,array('class'=>'form-control','id'=>'loan_rate')) }}
                 @if ($errors->has('loan_rate')) 
                 <div class="small">
@@ -80,7 +82,7 @@
                 @endif
             </div>
             <div class="form-group @if ($errors->has('late_fee')) has-error @endif">
-                {{ Form::label('late_fee', 'Late fee') }}
+                {{ Form::label('late_fee', Lang::get('loans.late.fee').':') }}
                 {{ Form::text('late_fee',null,array('class'=>'form-control','id'=>'late_fee')) }}
                 @if ($errors->has('late_fee')) 
                 <div class="small">
@@ -99,7 +101,7 @@
             </div>
             <div class="form-group @if ($errors->has('loan_status_id')) has-error @endif">
                 {{ Form::label('loan_status_id', Lang::get('loans.status').':') }}
-                {{ Form::select('loan_status_id', $contacts,null,array('class'=>"form-control")) }}
+                {{ Form::select('loan_status_id', $loan_statuses,null,array('class'=>"form-control")) }}
                 @if ($errors->has('loan_status_id')) 
                 <div class="small">
                     {{ $errors->first('loan_status_id', ':message') }} 
@@ -109,6 +111,15 @@
         </div>
         <div class="tab-pane" id="tab3">
             <p>
+            <div class="form-group @if ($errors->has('approval_date')) has-error @endif">
+                {{ Form::label('approval_date', 'Approval date:') }}
+                {{ Form::text('approval_date',null,array('class'=>'form-control')) }}
+                @if ($errors->has('approval_date')) 
+                <div class="small">
+                    {{ $errors->first('approval_date', ':message') }} 
+                </div>
+                @endif
+            </div>
             <div class="form-group @if ($errors->has('agent_id')) has-error @endif">
                 {{ Form::label('agent_id', Lang::get('loans.agent.singular').':') }}
                 {{ Form::select('agent_id', $contacts,null,array('class'=>"form-control")) }}
@@ -120,7 +131,7 @@
             </div>
             <div class="form-group @if ($errors->has('fund_id')) has-error @endif">
                 {{ Form::label('fund_id', 'Fund:') }}
-                {{ Form::text('fund_id',null,array('class'=>'form-control')) }}
+                {{ Form::select('fund_id', $funds,null,array('class'=>"form-control")) }}
                 @if ($errors->has('fund_id')) 
                 <div class="small">
                     {{ $errors->first('fund_id', ':message') }} 
@@ -129,13 +140,15 @@
             </div>
             <div class="form-group @if ($errors->has('loan_category_id')) has-error @endif">
                 {{ Form::label('loan_category_id', Lang::get('loans.category').':') }}
-                {{ Form::text('loan_category_id',null,array('class'=>"form-control")) }}
+                {{ Form::select('loan_category_id', $loan_categories,null,array('class'=>"form-control")) }}
                 @if ($errors->has('loan_category_id')) 
                 <div class="small">
                     {{ $errors->first('loan_category_id', ':message') }} 
                 </div>
                 @endif
             </div>
+        </div>
+        <div class="tab-pane" id="tab4">
             <div class="form-group @if ($errors->has('contract_URL')) has-error @endif">
                 {{ Form::label('contract_URL', 'Contract URL:') }}
                 {{ Form::text('contract_URL',null,array('class'=>'form-control','id'=>'contract_URL')) }}

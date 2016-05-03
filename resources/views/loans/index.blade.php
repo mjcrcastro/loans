@@ -32,7 +32,8 @@
         <thead>
             <tr>
                 <th>Customer</th>
-                <th>Loan date</th>
+                <th>Approval date</th>
+                <th> {{-- to display actual disbursment date --}}</th>
                 <th>Principal</th>
                 <th>Agent</th>
                 <th></th>
@@ -46,13 +47,16 @@
                    {{ $loan->loanBorrower->full_name }} 
                 </td>
                 <td>
+                    {{ $loan->approval_date }}
+                </td>
+                <td>
                     {{-- //TODO DISPLAY DISBURSMENT --}}
                 </td>
                 <td> 
-                   {{ $loan->principal }} 
+                   {{ number_format($loan->principal,2) }}
                 </td>
                 <td> 
-                   {{ $loan->loanAgent->full_name }} 
+                   {{ $loan->loanAgent->name }} 
                 </td>
                 <td> 
                     {{ link_to_route('loans.edit', 'Edit', array($loan->id), array('class'=>'btn btn-info '.Config::get('global/default.button_size'))) }} 
