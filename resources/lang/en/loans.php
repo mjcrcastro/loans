@@ -24,4 +24,6 @@ return [
     'status' => 'Status',
     'agent.singular' => 'Agent',
     'category' => 'Category',
+    'disbursments_qty'=> 'Disbursments',
+    'payments_qty'=> 'Payments',
 ];

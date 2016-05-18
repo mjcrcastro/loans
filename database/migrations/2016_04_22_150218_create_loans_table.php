@@ -28,6 +28,8 @@ class CreateLoansTable extends Migration
             $table->integer('agent_id') //agent managing customer relationship
                     ->index()->references('contacts')->on('id');
             $table->decimal('principal',8,2); //TODO update the size of this field for bigger loans
+            $table->integer('disbursments_qty'); //number of disbursments 
+            $table->integer('payments_qty'); //number of payments 
             $table->integer('term_id'); //loan term type
             $table->integer('term_value'); //loan term value
             $table->decimal('loan_rate',4,2); //interest rate

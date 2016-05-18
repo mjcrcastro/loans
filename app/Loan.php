@@ -13,7 +13,7 @@ class Loan extends Model
     protected $fillable = [
         'borrower_id','agent_id','approval_date','fund_id','loan_category_id',
         'guarantor_id','loan_status_id','principal','term_id','term_value',
-        'loan_rate', 'late_fee','contract_URL'
+        'loan_rate', 'late_fee','contract_URL','disbursments_qty','payments_qty'
     ];
     
     
