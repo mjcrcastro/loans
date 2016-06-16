@@ -24,26 +24,43 @@
     $(document).on('click', '#Payments', function () { //show modal for payments
         //first create a payment schedule
 
+        //append data to the modal 
+        $list = '';
+        $('#pTable').remove();
         for (nCount = 1; nCount < 10; nCount++) {
-            $('<div class="container container-fluid">' +
-                    '<div class="row" id="productRow">' +
-                    '<div class="col-xs-4"> ' + nCount + ' </div> ' +
-                    '<div class="col-xs-3"> {{ Form::number("amount[]",' + 50 + ',array("class"=>"form-control input-sm","step"=>"any","id"=>"amount")) }} </div>' +
-                    '<div class="col-xs-2"> <a href="#" id="removedescriptor">' +
-                    '</a></div> ' +
-                    '</div></div>').appendTo('#pList');
+            $list = $list + ' ' +
+                    '<tr>' +
+                    '<td class="col-xs-1"> ' + nCount + ' </td> ' +
+                    '<td class="col-xs-3"> date </td>' +
+                    '<td class="col-xs-3"> value </td>' +
+                    '</tr>'
         }
+        ;
 
-        //Show modal bootstrap
+        $('<table class="table" id = "pTable" cellspacing="0" width="100%">' +
+                ' <thead>' +
+                '<tr>' +
+                '<th></th>' +
+                '<th>Date</th>' +
+                '<th>Value</th>' +
+                '</tr>' +
+                '</thead>' +
+                $list +
+                '<tfoot>' +
+                '<tr>' +
+                '<th></th>' +
+                '<th>Date</th>' +
+                '<th>Value</th>' +
+                '</tr>' +
+                '</tfoot>' +
+                '</table>').appendTo('#pList');
+
+//Show modal bootstrap
         $('#pModal').modal('show');
         //return
+
     });
 
-    $(document).on('click', '#addProducts', function () { //create payments table
-        //Show modal bootstrap
-        $('#myModal').modal('show');
-        //return
-    });
 
 </script>
 
@@ -263,27 +280,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Payments Schedule</h4>
-                {{ link_to('#', 'Disbursments',array('class'=>'btn btn-primary col-xs-6','id'=>'Disbursments')) }}
-                <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Close</span></button>
+                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal" aria-label="Recalculate"><span aria-hidden="true">Recalculate</span></button>
+                <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Close</span></button>
             </div>
             <div class="modal-body">
-                <table class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Date</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <div id="pList"></div>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Date</th>
-                            <th>Value</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div id="pList"> </div>
             </div>
         </div>
     </div>
