@@ -6,7 +6,17 @@
      * the purchase_date text input control
      */
     $(function () {
-        $("#approval_date").datepicker({
+    $("#approval_date").datepicker({
+    changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            minDate: null,
+            yearRange: "c-120:c+0"
+    });
+    });
+    
+    $('body').on('focus', ".payment_date", function(){
+        $(this).datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "yy-mm-dd",
@@ -14,53 +24,77 @@
             yearRange: "c-120:c+0"
         });
     });
-
-    $(document).on('click', '#Disbursments', function () { //show modal for disbursments
-        //Show modal bootstrap
-        $('#dModal').modal('show');
-        //return
+            $(document).on('click', '#Disbursments', function () { //show modal for disbursments
+    //Show modal bootstrap
+    $('#dModal').modal('show');
+            //return
     });
-
+    
     $(document).on('click', '#Payments', function () { //show modal for payments
-        //first create a payment schedule
-
-        //append data to the modal 
-        $list = '';
-        $('#pTable').remove();
-        for (nCount = 1; nCount < 10; nCount++) {
-            $list = $list + ' ' +
-                    '<tr>' +
-                    '<td class="col-xs-1"> ' + nCount + ' </td> ' +
-                    '<td class="col-xs-3"> date </td>' +
-                    '<td class="col-xs-3"> value </td>' +
-                    '</tr>'
-        }
-        ;
-
-        $('<table class="table" id = "pTable" cellspacing="0" width="100%">' +
-                ' <thead>' +
-                '<tr>' +
-                '<th></th>' +
-                '<th>Date</th>' +
-                '<th>Value</th>' +
-                '</tr>' +
-                '</thead>' +
-                $list +
-                '<tfoot>' +
-                '<tr>' +
-                '<th></th>' +
-                '<th>Date</th>' +
-                '<th>Value</th>' +
-                '</tr>' +
-                '</tfoot>' +
-                '</table>').appendTo('#pList');
-
-//Show modal bootstrap
-        $('#pModal').modal('show');
-        //return
+    //first create a payment schedule
+                
+                //check for emtpy values in the whole table
+                if (dataInTable()) { //if table is emtpy
+                        fn_recreate(); //recreate table content
+                    } else {
+                        //do nothing
+                } 
+                $('#pModal').modal('show');//Show modal bootstrap
+         //return
 
     });
+    function fn_recreate() {
+    //append data to the modal 
+                $list = '';
+                var $nPeriods = $('#payments_qty').val();
+                $('#pTable').remove();
+                //Add create table contents
+                for (nCount = 1; nCount <= $nPeriods; nCount++) {
+                    $list = $list + ' ' +
+                    '<tr>' +
+                    '<td class="col-xs-1 payment_count"> ' + nCount + ' </td> ' +
+                    '<td class="col-xs-3"> {{ Form::text("payment_date[]",null,array("class"=>"form-control payment_date")) }} </td>' +
+                    '<td class="col-xs-3"> {{ Form::text("payment_value[]",null,array("class"=>"form-control payment_value")) }} </td>' +
+                    '</tr>'
+                };
+                
+                //attach table details to table structure
+                $('<table class="table" id = "pTable" cellspacing="0" width="100%">' +
+                            ' <thead>' +
+                            '<tr>' +
+                            '<th></th>' +
+                            '<th>Date</th>' +
+                            '<th>Value</th>' +
+                            '</tr>' +
+                            '</thead>' +
+                            $list +
+                            '<tfoot>' +
+                            '<tr>' +
+                            '<th></th>' +
+                            '<th>Date</th>' +
+                            '<th>Value</th>' +
+                            '</tr>' +
+                            '</tfoot>' +
+                            '</table>').appendTo('#pList');
+                }
+                
+    function dataInTable() {
+        var $tableEmpty = true;
+                
+                $('.payment_date').each(function(){
+                    if (this.value !== "") {
+                        $tableEmpty = false;
+                    }
+                });
 
+                $('.payment_value').each(function(){
+                    if (this.value !== "") {
+                        $tableEmpty = false;
+                    }
+                });
+                
+                return $tableEmpty;
+    }
 
 </script>
 
