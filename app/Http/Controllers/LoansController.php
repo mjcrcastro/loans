@@ -105,8 +105,10 @@ class LoansController extends Controller {
                     ->lists('description', 'id');
             $loan_categories = \App\LoanCategory::orderBy('description')->get()
                     ->lists('description', 'id');
+            $payments_schedule = \App\PaymentSchedule::orderBy('scheduled_date')->get();
             $terms = ['1' => 'Days', '2' => 'Weeks', '3' => 'Months', '4' => 'Years'];
-            return view('loans.edit', compact('loan', 'contacts', 'funds', 'loan_statuses', 'loan_categories', 'terms'));
+            return view('loans.edit', compact('loan', 'contacts', 'funds', 
+                    'loan_statuses', 'loan_categories', 'terms','payments_schedule'));
         }
     }
 
@@ -137,6 +139,7 @@ class LoansController extends Controller {
         $loan = Loan::find($id);
         $loan->fill($request->all());
         $loan->save();
+        // $loanPayments = \App\PaymentSchedule::
 
         //and return to the index
         return redirect()->route('loans.index')

@@ -37,4 +37,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('funds','FundsController');
     Route::resource('loan_statuses','LoanStatusesController');
     Route::resource('loans','LoansController');
+    Route::get('jpayments', array('uses' => 'serverFunctions@payments'));
 });

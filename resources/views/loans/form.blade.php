@@ -6,16 +6,16 @@
      * the purchase_date text input control
      */
     $(function () {
-    $("#approval_date").datepicker({
-    changeMonth: true,
+        $("#approval_date").datepicker({
+            changeMonth: true,
             changeYear: true,
             dateFormat: "yy-mm-dd",
             minDate: null,
             yearRange: "c-120:c+0"
+        });
     });
-    });
-    
-    $('body').on('focus', ".payment_date", function(){
+
+    $('body').on('focus', ".payment_date", function () {
         $(this).datepicker({
             changeMonth: true,
             changeYear: true,
@@ -24,76 +24,80 @@
             yearRange: "c-120:c+0"
         });
     });
-            $(document).on('click', '#Disbursments', function () { //show modal for disbursments
-    //Show modal bootstrap
-    $('#dModal').modal('show');
-            //return
+    $(document).on('click', '#Disbursments', function () { //show modal for disbursments
+        //Show modal bootstrap
+        $('#dModal').modal('show');
+        //return
     });
-    
+
     $(document).on('click', '#Payments', function () { //show modal for payments
-    //first create a payment schedule
-                
-                //check for emtpy values in the whole table
-                if (dataInTable()) { //if table is emtpy
-                        fn_recreate(); //recreate table content
-                    } else {
-                        //do nothing
-                } 
-                $('#pModal').modal('show');//Show modal bootstrap
-         //return
+        //first create a payment schedule
+
+        //check for emtpy values in the whole table
+        if (dataInTable()) { //if table is emtpy
+            fn_recreate(); //recreate table content
+        } else {
+            //do nothing
+        }
+        $('#pModal').modal('show');//Show modal bootstrap
+        //return
 
     });
     function fn_recreate() {
-    //append data to the modal 
-                $list = '';
-                var $nPeriods = $('#payments_qty').val();
-                $('#pTable').remove();
-                //Add create table contents
-                for (nCount = 1; nCount <= $nPeriods; nCount++) {
-                    $list = $list + ' ' +
+        //append data to the modal 
+        $list = '';
+        var $nPeriods = $('#payments_qty').val();
+        $('#pTable').remove();
+        //Add create table contents
+        for (nCount = 1; nCount <= $nPeriods; nCount++) {
+            $list = $list + ' ' +
                     '<tr>' +
                     '<td class="col-xs-1 payment_count"> ' + nCount + ' </td> ' +
-                    '<td class="col-xs-3"> {{ Form::text("payment_date[]",null,array("class"=>"form-control payment_date")) }} </td>' +
-                    '<td class="col-xs-3"> {{ Form::text("payment_value[]",null,array("class"=>"form-control payment_value")) }} </td>' +
+                    '<td class="col-xs-3"> {{ Form::text("schedule_date[]",null,array("class"=>"form-control payment_date")) }} </td>' +
+                    '<td class="col-xs-3"> {{ Form::text("p_value[]",null,array("class"=>"form-control p_value")) }} </td>' +
+                    '<td class="col-xs-3"> {{ Form::text("i_value[]",null,array("class"=>"form-control i_value")) }} </td>' +
                     '</tr>'
-                };
-                
-                //attach table details to table structure
-                $('<table class="table" id = "pTable" cellspacing="0" width="100%">' +
-                            ' <thead>' +
-                            '<tr>' +
-                            '<th></th>' +
-                            '<th>Date</th>' +
-                            '<th>Value</th>' +
-                            '</tr>' +
-                            '</thead>' +
-                            $list +
-                            '<tfoot>' +
-                            '<tr>' +
-                            '<th></th>' +
-                            '<th>Date</th>' +
-                            '<th>Value</th>' +
-                            '</tr>' +
-                            '</tfoot>' +
-                            '</table>').appendTo('#pList');
-                }
-                
+        }
+        ;
+
+        //attach table details to table structure
+        $('<table class="table" id = "pTable" cellspacing="0" width="100%">' +
+                ' <thead>' +
+                '<tr>' +
+                '<th></th>' +
+                '<th>Date</th>' +
+                '<th>Principal</th>' +
+                '<th>Interest</th>' +
+                '</tr>' +
+                '</thead>' +
+                $list +
+                '<tfoot>' +
+                '<tr>' +
+                '<th></th>' +
+                '<th>Date</th>' +
+                '<th>Principal</th>' +
+                '<th>Interest</th>' +
+                '</tr>' +
+                '</tfoot>' +
+                '</table>').appendTo('#pList');
+    }
+
     function dataInTable() {
         var $tableEmpty = true;
-                
-                $('.payment_date').each(function(){
-                    if (this.value !== "") {
-                        $tableEmpty = false;
-                    }
-                });
 
-                $('.payment_value').each(function(){
-                    if (this.value !== "") {
-                        $tableEmpty = false;
-                    }
-                });
-                
-                return $tableEmpty;
+        $('.payment_date').each(function () {
+            if (this.value !== "") {
+                $tableEmpty = false;
+            }
+        });
+
+        $('.payment_value').each(function () {
+            if (this.value !== "") {
+                $tableEmpty = false;
+            }
+        });
+
+        return $tableEmpty;
     }
 
 </script>
@@ -290,7 +294,8 @@
                         <tr>
                             <th></th>
                             <th>Date</th>
-                            <th>Value</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
                         </tr>
                     </thead>
 
@@ -298,7 +303,8 @@
                         <tr>
                             <th></th>
                             <th>Date</th>
-                            <th>Value</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -318,7 +324,37 @@
                 <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Close</span></button>
             </div>
             <div class="modal-body">
-                <div id="pList"> </div>
+                <div id="pList">
+                    @if ($payments_schedule->count())
+                    {{-- TODO create a more elegant way of showing payment schedules--}}    
+                    <table class="table" id = "pTable" cellspacing="0" width="100%">' +
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        @foreach ($payments_schedule as $payments_item)
+                        <tr>
+                            <td class="col-xs-1 payment_count">  {{ $payments_item->id }}  </td> 
+                            <td class="col-xs-3"> {{ Form::text("schedule_date[]",$payments_item->schedule_date,array("class"=>"form-control schedule_date")) }} </td>
+                            <td class="col-xs-3"> {{ Form::text("p_value[]",$payments_item->p_value + $payments_item->p_value,array("class"=>"form-control p_value")) }} </td>
+                            <td class="col-xs-3"> {{ Form::text("i_value[]",$payments_item->p_value + $payments_item->i_value,array("class"=>"form-control i_value")) }} </td>
+                        </tr>
+                        @endforeach
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Value</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @else
+
+                    @endif
+                </div>
             </div>
         </div>
     </div>

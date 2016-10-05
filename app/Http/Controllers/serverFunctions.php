@@ -53,41 +53,53 @@ class serverFunctions extends Controller {
                 break;
             default: // error?
         }
-        
+
         $initial_date = new \DateTime($initial_date);
         $end_date = new \DateTime($end_date);
         $schedule = array();
-        
+
         $principal_remaining = $principal;
-        
-        $delta_date = date_diff($end_date,$initial_date);
-        
-        $time_lapse = $delta_date->days / $payments_number;
-        
+
+        $delta_date = date_diff($end_date, $initial_date);
+
+        $time_lapse = round($delta_date->days / $payments_number,0);
+
         //get an initial aproximation of periodic payment
 
         $interest_rate_period = $interest_rate / 360 * $delta_date->days;
-        
-        $payment = round($interest_rate_period * $principal / (1 - (1 + $interest_rate_period) ** -$payments_number),2);
-        
-        for ($nCount = 0;  $nCount < $payments_number; $nCount++) {
-            
-            $interest_to_date = round($principal_remaining * $interest_rate_period,2);
-            $principal_remaining = round($principal_remaining - ($payment - $interest_to_date),2);
-            
+
+        $payment = round($interest_rate_period * $principal / (1 - (1 + $interest_rate_period) ** -$payments_number), 2);
+
+        $nCount = 0;
+
+        for ($nCount = 0; $nCount < $payments_number - 1; $nCount++) {
+
+            $interest_to_date = round($principal_remaining * $interest_rate_period, 2);
+
+            $principal_remaining = round($principal_remaining - ($payment - $interest_to_date), 2);
+
             //add row to schedule
             $schedule[] = array(
                 'count' => $nCount + 1,
-                'date' => date('Y-m-d', strtotime($initial_date->format('Y-m-d'). '+ ' . $delta_date->days*$nCount . ' days')),
-                'payment'=>$payment,
-                'principal_remaining'=>$principal_remaining,
-                'interest' => $interest_to_date,
-                'time_lapse'=> $time_lapse,
-                'interest_rate'=>$interest_rate_period 
+                'date' => date('Y-m-d', strtotime($initial_date->format('Y-m-d') . '+ ' . $delta_date->days * $nCount . ' days')),
+                'payment' => $payment,
+                'principal'=>$payment - $interest_to_date,
+                'interest' => $interest_to_date
             );
-            
         }
-        
+
+        $interest_to_date = round($principal_remaining * $interest_rate_period, 2);
+
+        $last_payment = $principal_remaining + $interest_to_date;
+
+        $schedule[] = array(
+            'count' => $nCount + 1,
+            'date' => date('Y-m-d', strtotime($initial_date->format('Y-m-d') . '+ ' . $delta_date->days * $nCount . ' days')),
+            'payment' => $last_payment,
+            'principal'=>$last_payment - $interest_to_date,
+            'interest' => $interest_to_date
+        );
+
         return $schedule;
     }
 
